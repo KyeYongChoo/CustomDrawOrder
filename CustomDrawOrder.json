@@ -1,0 +1,10 @@
+{
+  "id": "CustomDrawOrder",
+  "name": "Custom Draw Order",
+  "author": "KyeYongChoo",
+  "description": "Every card draw lets you choose which cards to take from your draw pile, to simulate a perfect draw order.",
+  "version": "1.0.0",
+  "has_pck": false,
+  "has_dll": true,
+  "affects_gameplay": true
+}
