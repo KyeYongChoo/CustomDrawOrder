@@ -9,11 +9,23 @@ Confirmed in game by the user: the draw screen works, and so does the Enabled ti
 General → Mod Settings, the "Installed Mods" panel; and BaseLib's Mod Configuration). The user has used the mod on 3
 candidate seeds from the seed search, and all 3 turned out to be winnable.
 
-Steam Workshop: the upload workspace is `C:\Users\chook\Desktop\sts2-mod-uploader\bin\Debug\net8.0\CustomDrawOrder`
-(`workshop.json`, `image.png` and `previews\` each under 1 MB, and `content\` holding `CustomDrawOrder.dll`,
-`CustomDrawOrder.BaseLib.dll` and `CustomDrawOrder.json` from `bin\Release\net9.0`). To publish a new build, copy those
-3 files into `content\` again, set `changeNote`, and run `ModUploader.exe upload -w CustomDrawOrder` from
-`bin\Debug\net8.0`. Once the first upload has run, `mod_id.txt` there holds the Workshop item id.
+## Steam Workshop upload workspace
+
+The Workshop copy is uploaded from
+`C:\Users\chook\Desktop\sts2-mod-uploader\bin\Debug\net8.0\CustomDrawOrder\`, **outside this repo and not under
+version control**. When the mod changes, update it there as well as here:
+
+- `content\`: `CustomDrawOrder.dll`, `CustomDrawOrder.BaseLib.dll` and `CustomDrawOrder.json`, copied from this repo's
+  `bin\Release\net9.0\` after `dotnet build -c Release`. Ship all 3 together; nothing else.
+- `workshop.json`: the Workshop page's title, description (keep it in step with README.md: features, menu paths,
+  game version, GitHub link), tags and `changeNote` (describe each update).
+- `image.png` (cover) and `previews\` (extra screenshots): each must be under 1 MB. Preview files are matched by
+  filename on update, so renaming one replaces it on Steam.
+- `mod_id.txt`: the Workshop item id, written by the first upload. Keep it, or the next upload creates a new item.
+
+Don't upload yourself. The user runs `ModUploader.exe upload -w CustomDrawOrder` from
+`C:\Users\chook\Desktop\sts2-mod-uploader\bin\Debug\net8.0\`. The sibling mods' workspaces are next to it
+(`AdjustUnknownChances\`, `RngPreview\`).
 
 ## Ground rules
 
