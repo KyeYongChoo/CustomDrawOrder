@@ -36,7 +36,7 @@ one by one exactly as the game would draw them.
 An **Enabled** tickbox takes effect immediately, even mid-combat (no restart). It's in two places, which change the
 same setting:
 
-- **Main Menu → Settings → Mods → Custom Draw Order** (always available)
+- **Main Menu → Settings → General → Mod Settings → Custom Draw Order** (always available)
 - **Main Menu → Mod Configuration → Custom Draw Order** (only when
   [BaseLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127) is installed; BaseLib is optional)
 

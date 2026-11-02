@@ -5,14 +5,21 @@ testing whether a seed is unwinnable with perfect information; companion to the 
 `C:\Users\chook\Desktop\Searching for an Unwinnable Seed` (Necrobinder, Act 1, forced early elite) and to the sibling
 mod repo **RngPreview** (expected at `C:\Users\chook\Desktop\RngPreview`). See README.md for the player's view.
 
-The user confirmed in game that the draw screen works. The Enabled tickbox (Settings → Mods and BaseLib's Mod
-Configuration) has not been checked in game yet.
+Confirmed in game by the user: the draw screen works, and so does the Enabled tickbox in both places (Settings →
+General → Mod Settings, the "Installed Mods" panel; and BaseLib's Mod Configuration). The user has used the mod on 3
+candidate seeds from the seed search, and all 3 turned out to be winnable.
+
+Steam Workshop: the upload workspace is `C:\Users\chook\Desktop\sts2-mod-uploader\bin\Debug\net8.0\CustomDrawOrder`
+(`workshop.json`, `image.png` and `previews\` each under 1 MB, and `content\` holding `CustomDrawOrder.dll`,
+`CustomDrawOrder.BaseLib.dll` and `CustomDrawOrder.json` from `bin\Release\net9.0`). To publish a new build, copy those
+3 files into `content\` again, set `changeNote`, and run `ModUploader.exe upload -w CustomDrawOrder` from
+`bin\Debug\net8.0`. Once the first upload has run, `mod_id.txt` there holds the Workshop item id.
 
 ## Ground rules
 
-- **Never guess game behaviour; read the decompiled code.** Decompile into the session scratchpad (never commit it):
-  `ilspycmd -p -o <scratch>/sts2src "C:\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\sts2.dll"`
-  (~1 min). BaseLib: `...\steamapps\workshop\content\2868840\3737335127\BaseLib\BaseLib.dll`.
+- **Never guess game behaviour; read the decompiled code** in `C:\Users\chook\Desktop\sts2-decompiled\` (`sts2\`,
+  `BaseLib\`; shared by all STS2 projects, never commit it). Run `bash ~/Desktop/sts2-decompiled/update.sh` first: it
+  decompiles again only if the game or BaseLib updated.
 - Install fails with "file locked by SlayTheSpire2.exe" while the game runs. Don't kill the game; ask the user to close
   it and run `! cd "<this repo>" && dotnet build -c Release`.
 - The user tests in game; say plainly what hasn't been tried in game.
@@ -51,7 +58,7 @@ Configuration) has not been checked in game yet.
 - A mod is `<game>\mods\<Id>\<Id>.json` (manifest) + `<Id>.dll`. `Mod.cs` is the `[ModInitializer]`: load settings,
   `Harmony.PatchAll`, register with BaseLib.
 - `ModToggle/` (namespace `ModToggle`, with `ModInfo.cs`) is the Enabled tickbox: settings file, panel in Settings →
-  Mods (`NModInfoContainer.Fill/Clear` patches), and `BaseLibBridge`. **The same code is duplicated in the RngPreview
+  General → Mod Settings (`NModInfoContainer.Fill/Clear` patches), and `BaseLibBridge`. **The same code is duplicated in the RngPreview
   repo**; keep the two copies in sync when changing it.
 - The game calls `GetTypes()` on every mod DLL, so nothing in the main DLL may reference BaseLib. The BaseLib part is a
   separate `CustomDrawOrder.BaseLib.dll` (`BaseLibCompat/`), loaded by `BaseLibBridge` only when BaseLib is loaded
